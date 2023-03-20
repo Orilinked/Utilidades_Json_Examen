@@ -82,7 +82,7 @@ public class JSONULT {
      * @param contingut contingut de l'String amb format json
      * @throws IOException excepció d'E/S
      */
-    public void escriuStringJsonAFitxerJson(String rutaDesti,String contingut){
+    public void escriuStringJsonAFitxerJson(String rutaDesti, String contingut) {
         Path p = Paths.get(rutaDesti);
         try {
             Files.write(p, contingut.getBytes());
@@ -91,8 +91,14 @@ public class JSONULT {
         }
     }
 
-    public String jsonAPrettyFormat(String jsonString){
-        JsonElement json= JsonParser.parseString(jsonString);
+    /**
+     * Transforma un json String normal a un Json Pretty
+     *
+     * @param jsonString
+     * @return
+     */
+    public String jsonAPrettyFormat(String jsonString) {
+        JsonElement json = JsonParser.parseString(jsonString);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String prettyJson = gson.toJson(json);
         return prettyJson;
