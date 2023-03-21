@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -64,8 +65,8 @@ public class JSONULT {
      * @throws ParseException Excepció de Parser
      */
     public JSONArray retornaFitxerJson(String fitxer){
-        JSONParser jp = new JSONParser();
         try {
+            JSONParser jp = new JSONParser();
             Object obj = jp.parse(new FileReader(fitxer));
             JSONArray jsonArray = (JSONArray) obj;
             return jsonArray;
@@ -85,7 +86,8 @@ public class JSONULT {
     public void escriuStringJsonAFitxerJson(String rutaDesti, String contingut) {
         Path p = Paths.get(rutaDesti);
         try {
-            Files.write(p, contingut.getBytes());
+            Files.write(p, contingut.getBytes(), StandardOpenOption.APPEND);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
